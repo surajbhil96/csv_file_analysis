@@ -1,0 +1,80 @@
+<html>
+<head>
+    <title>Data Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('C:/New folder/Django/csv_analysis/analysis/templates/analysis/images/background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Ensure padding and border are included in element's total width and height */
+        }
+
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .analysis-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Style for the plot image */
+        .analysis-section img {
+            max-width: 100%; /* Ensure the image does not exceed the width of its container */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove extra space below the image */
+            margin: 0 auto; /* Center the image horizontally */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Data Analysis</h1>
+        
+        <!-- Display Head of the DataFrame -->
+        <div class="analysis-section">
+            <h2>Head of the DataFrame</h2>
+            <div>{{ head|safe }}</div>
+        </div>
+        
+        <!-- Display Descriptive Statistics -->
+        <div class="analysis-section">
+            <h2>Descriptive Statistics</h2>
+            <div>{{ description|safe }}</div>
+        </div>
+        
+        <!-- Display Missing Values Count -->
+        <div class="analysis-section">
+            <h2>Missing Values</h2>
+            <div>
+                {% for column, count in missing_values.items %}
+                    <p>Column "{{ column }}": {{ count }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Display Plot -->
+        <div class="analysis-section">
+            <h2>Plot</h2>
+            <img src="{{ plot_url }}" alt="Data Plot">
+        </div>
+    </div>
+</body>
+</html>
